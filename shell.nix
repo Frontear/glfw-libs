@@ -8,10 +8,10 @@ in stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "glfw";
     repo = "glfw";
-    rev = "bf945f1";
-    sha256 = "sha256-3pKUUfoQjKWgY03/nh4QfJFtqQW375bdsEElPrahOxU=";
+    rev = "228e582";
+    sha256 = "sha256-MaKW8GH5E6N+O1R0uS3CadQRdonMycMw0LqPd8K7HBU=";
   };
-  
+
   buildInputs = with pkgs; [
     cmake
     gcc pkgsCross.mingwW64.buildPackages.gcc
