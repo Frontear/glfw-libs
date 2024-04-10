@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "glfw": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1711714711,
+        "narHash": "sha256-MaKW8GH5E6N+O1R0uS3CadQRdonMycMw0LqPd8K7HBU=",
+        "owner": "glfw",
+        "repo": "glfw",
+        "rev": "228e58262e18f2ee61799bd86d0be718b1e31f9f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glfw",
+        "repo": "glfw",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1712608508,
+        "narHash": "sha256-vMZ5603yU0wxgyQeHJryOI+O61yrX2AHwY6LOFyV1gM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4cba8b53da471aea2ab2b0c1f30a81e7c451f4b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "glfw": "glfw",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
