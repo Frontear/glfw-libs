@@ -3,11 +3,11 @@
     "glfw": {
       "flake": false,
       "locked": {
-        "lastModified": 1711714711,
-        "narHash": "sha256-MaKW8GH5E6N+O1R0uS3CadQRdonMycMw0LqPd8K7HBU=",
+        "lastModified": 1712939273,
+        "narHash": "sha256-AOgeZEoulpFCZWoqiH4c5xE596HzdiiAQYsMCc7G9+M=",
         "owner": "glfw",
         "repo": "glfw",
-        "rev": "228e58262e18f2ee61799bd86d0be718b1e31f9f",
+        "rev": "b35641f4a3c62aa86a0b3c983d163bc0fe36026d",
         "type": "github"
       },
       "original": {
