@@ -24,6 +24,6 @@ let
 in runCommandLocal "glfw-libs" {} ''
   mkdir -p $out
 
-  cp $(readlink -f ${x86_64-linux.glfw}/lib/libglfw.so) $out
-  cp ${mingwW64.glfw}/bin/glfw3.dll $out
+  cp $(readlink -f ${x86_64-linux.glfw}/lib/libglfw.so) $out/libglfw.so
+  cp ${mingwW64.glfw}/bin/glfw3.dll $out/glfw3.dll
 ''
