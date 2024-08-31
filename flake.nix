@@ -1,5 +1,5 @@
 {
-  description = "Description for the project";
+  description = "Simple flake with a package that exposes shared libraries for x86_64-linux and mingwW64 systems.";
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -14,6 +14,6 @@
       ./nix
     ];
 
-    systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+    systems = [ "x86_64-linux" ]; # TODO: can x86_64-darwin work?
   };
 }

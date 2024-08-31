@@ -1,49 +1,83 @@
 {
+  src,
+
+  runCommandLocal,
+
   glfw,
-  pkgs,
-  stdenv,
+  pkgsCross,
 }:
+let
+  glfwAttrs = {
+    version = "3.5";
+
+    inherit src;
+
+    # Remove all NixOS specific fixes
+    patches = null;
+    cmakeFlags = [ "-D BUILD_SHARED_LIBS=ON" ];
+    postPatch = "";
+    postFixup = "";
+  };
+
+  x86_64-linux.glfw = glfw.overrideAttrs (glfwAttrs);
+  mingwW64.glfw = pkgsCross.mingwW64.glfw.overrideAttrs (glfwAttrs);
+in runCommandLocal "glfw-libs" {} ''
+  mkdir -p $out
+
+  cp $(readlink -f ${x86_64-linux.glfw}/lib/libglfw.so) $out
+  cp ${mingwW64.glfw}/bin/glfw3.dll $out
+''
+/*
 stdenv.mkDerivation {
   name = "glfw-libs";
 
-  src = glfw;
+  src = /var/empty; 
 
-  buildInputs = with pkgs; [
-    cmake
-    gcc pkgsCross.mingwW64.buildPackages.gcc
-    pkg-config
-    libffi
+  installPhase = ''
+    mkdir -p $out
 
-    libGL
+    cp $(readlink -f ${x86_64-linux.glfw}/lib/libglfw.so) $out
+    cp ${mingwW64.glfw}/bin/glfw3.dll $out
+  '';
+}
+*/
+/*
+stdenv.mkDerivation {
+  name = "glfw-libs";
 
-    # Wayland
+  inherit src;
+
+  dontUseCmakeConfigure = true;
+
+  propagatedBuildInputs = [ libGL ];
+
+  nativeBuildInputs = [ cmake extra-cmake-modules wayland-scanner ];
+
+  buildInputs = [
     wayland
     wayland-protocols
     libxkbcommon
-
-    # X11
-    xorg.libX11
-    xorg.libXrandr
-    xorg.libXinerama
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXext
+    libX11
+    libXrandr
+    libXinerama
+    libXcursor
+    libXi
+    libXext
   ];
-
-  dontUseCmakeConfigure = true;
 
   buildPhase = ''
    cmake -S $src -B linux_build -D BUILD_SHARED_LIBS=ON
    cmake --build linux_build
 
-   cmake -S $src -B windows_build -D BUILD_SHARED_LIBS=ON -D CMAKE_TOOLCHAIN_FILE=CMake/x86_64-w64-mingw32.cmake
-   cmake --build windows_build
+   #cmake -S $src -B windows_build -D BUILD_SHARED_LIBS=ON -D CMAKE_TOOLCHAIN_FILE=CMake/x86_64-w64-mingw32.cmake
+   #cmake --build windows_build
   '';
 
   installPhase = ''
    mkdir -p $out
 
    cp $(readlink -f linux_build/src/libglfw.so) $out/libglfw.so
-   cp windows_build/src/glfw3.dll $out/glfw3.dll
+   #cp windows_build/src/glfw3.dll $out/glfw3.dll
   '';
 }
+*/
